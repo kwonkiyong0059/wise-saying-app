@@ -19,6 +19,15 @@ public class QuoteService {
         return quote.map(Quote::toString).orElse("해당 번호의 명언이 없습니다.");
     }
 
+    public String getQuoteByIdDetails(int id) {
+        Optional<Quote> quote = repository.findById(id);
+        if (quote.isPresent()) {
+            return "기존 명언: " + quote.get().getContent() + "\n기존 작가: " + quote.get().getAuthor();
+        }
+        return "해당 번호의 명언이 없습니다.";
+    }
+
+
     public String getAllQuotes() {
         List<Quote> quotes = repository.findAll();
         if (quotes.isEmpty()) {

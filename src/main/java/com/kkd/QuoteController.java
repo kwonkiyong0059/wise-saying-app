@@ -77,13 +77,25 @@ public class QuoteController {
 
     private void updateQuote() {
         int id = getIdInput("수정할 명언 번호: ");
-        sc.nextLine(); // 버퍼 비우기
-        System.out.print("새로운 명언: ");
-        String newContent = sc.nextLine();
-        System.out.print("새로운 작가: ");
-        String newAuthor = sc.nextLine();
-        System.out.println(service.updateQuote(id, newContent, newAuthor));
+
+        // 기존 명언 및 작가 정보 출력
+        String existingQuoteInfo = service.getQuoteByIdDetails(id);
+        if (!existingQuoteInfo.equals("해당 번호의 명언이 없습니다.")) {
+            System.out.println(existingQuoteInfo);
+
+            sc.nextLine(); // 버퍼 비우기
+            System.out.print("새로운 명언: ");
+            String newContent = sc.nextLine();
+            System.out.print("새로운 작가: ");
+            String newAuthor = sc.nextLine();
+
+            // 수정 결과 출력
+            System.out.println(service.updateQuote(id, newContent, newAuthor));
+        } else {
+            System.out.println(existingQuoteInfo);
+        }
     }
+
 
     private void deleteQuote() {
         int id = getIdInput("삭제할 명언 번호: ");
