@@ -1,20 +1,16 @@
 package com.kkd;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class Quote {
     private final int id;
     private String content;
     private String author;
-
-    public Quote(int id, String content, String author) {
-        this.id = id;
-        this.content = content;
-        this.author = author;
-    }
 
     @Override
     public String toString() {
